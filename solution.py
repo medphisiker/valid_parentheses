@@ -1,38 +1,14 @@
-#  ()[]{}
 class Solution:
     def isValid(self, s: str) -> bool:
-        # stack для хранения скобок
         stack = []
-
+        mapping = {')': '(', ']': '[', '}': '{'}
+        opening_brackets = set(mapping.values())  # множество {'(', '[', '{'}
+        
         for char in s:
-            if char == "(" or char == "[" or char == "{":
+            if char in opening_brackets:  # O(1) - проверка в множестве
                 stack.append(char)
-
-            elif char == ")":
-                try:
-                    bracket = stack.pop()
-                    if bracket != "(":
-                        return False
-                except:
+            elif char in mapping:  # O(1) - проверка ключей словаря
+                if not stack or stack.pop() != mapping[char]:
                     return False
-
-            elif char == "]":
-                try:
-                    bracket = stack.pop()
-                    if bracket != "[":
-                        return False
-                except:
-                    return False
-
-            elif char == "}":
-                try:
-                    bracket = stack.pop()
-                    if bracket != "{":
-                        return False
-                except:
-                    return False
-
-        if not stack:
-            return True
-        else:
-            return False
+        
+        return not stack
