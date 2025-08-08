@@ -1,4 +1,4 @@
-from solution import Solution
+from solution_deque import Solution
 
 def test():
     solution = Solution()
