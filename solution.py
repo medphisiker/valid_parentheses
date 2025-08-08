@@ -1,14 +1,21 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        # если число символов в строке нечетное, точно есть
+        # скобка без пары, строка со скобками не валидная
+        if len(s) % 2 != 0:
+            return False
+        
         stack = []
-        mapping = {')': '(', ']': '[', '}': '{'}
-        opening_brackets = set(mapping.values())  # множество {'(', '[', '{'}
+        mapping = {")":"(", "]":"[", "}":"{"}
+        open_brackets = set(mapping.values())
         
         for char in s:
-            if char in opening_brackets:  # O(1) - проверка в множестве
+            # операция O(1) для множества
+            if char in open_brackets: 
                 stack.append(char)
-            elif char in mapping:  # O(1) - проверка ключей словаря
-                if not stack or stack.pop() != mapping[char]:
-                    return False
+
+            # операция O(1) для словаря (хэш таблицы)
+            elif not stack or stack.pop() != mapping[char]:
+                return False
         
         return not stack
