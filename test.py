@@ -17,27 +17,33 @@ def test():
     s = "(]"
     result = solution.isValid(s)
     assert not result
-    
+
+    inputs = ["{][}", "([)]", "(){}[]", "({)", "])"]
+    results = [False, False, True, False, False]
+    for input, result in zip(inputs, results):
+        sol_result = solution.isValid(input)
+        assert sol_result == result
+
     # Пример 4
     s = "([])"
     result = solution.isValid(s)
     assert result
-    
+
     # Пример 5
     s = "([)]"
     result = solution.isValid(s)
     assert not result
-    
+
     # Тест
     s = "["
     result = solution.isValid(s)
     assert not result
-    
+
     # Тест
     s = "]"
     result = solution.isValid(s)
-    assert not result
-
+    assert not result    
+    
 
 if __name__ == "__main__":
     test()
